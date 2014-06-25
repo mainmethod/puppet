@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+       ServerName <%= scope['apache2::sitename'] %>.com
+       ServerAlias www.<%= scope['apache2::sitename'] %>.com
+       DocumentRoot /var/www/<%= scope['apache2::sitename'] %>
+       <Directory /var/www/<%= scope['apache2::sitename'] %>>
+               AllowOverride All
+               Options -MultiViews
+               AuthUserFile /var/www/htpasswd/.htpasswd
+               AuthGroupFile /dev/null
+               AuthName "<%= scope['apache2::sitename'] %>"
+               AuthType Basic
+               SetEnv database "<%= scope['apache2::sitename'] %>"
+               SetEnv username "<%= scope['apache2::sitename'] %>_user"
+               SetEnv password ""
+               SetEnv host "localhost"
+               SetEnv slavehost "localhost"
+               SetEnv port ""
+               SetEnv driver "mysql"
+               SetEnv prefix "mk_"
+               SetEnv environment "production"
+               <Limit GET>
+                       require valid-user
+               </Limit>
+       </Directory>
+</VirtualHost>

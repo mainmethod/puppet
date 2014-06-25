@@ -1,5 +1,4 @@
 class users {
-  notice("class users")
   user { 'deploy':
     ensure     => 'present',
     groups     => ['sudo', 'ubuntu'],
