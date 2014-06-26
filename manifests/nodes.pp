@@ -7,9 +7,11 @@ node default {
   include memcached
   include imagemagick
   class { 'apache2':
-    sitename => 'kitchendaily'
+    sitename => 'drupal_site'
   }
   include apache2_utils
-  include php
+  class { 'php': 
+    modules => ['php5-mysql','php5-curl','php5-imagick','php5-memcached']
+  }
   include mysql
 }
